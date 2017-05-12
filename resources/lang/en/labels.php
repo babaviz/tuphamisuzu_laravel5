@@ -97,6 +97,22 @@ return [
                 'view' => 'View User',
             ],
         ],
+
+        'products' => [
+            'create'     => 'Create Product',
+            'edit'       => 'Edit Product',
+            'management' => 'Product Management',
+
+            'table' => [
+                'created'        => 'Created',
+                'id'             => 'ID',
+                'last_updated'   => 'Last Updated',
+                'name'           => 'Name',
+                'description'    => 'Description',
+                'no_deleted'     => 'No Deleted Products',
+                'total'          => 'product total|products total',
+            ],
+        ],
     ],
 
     'frontend' => [

@@ -48,6 +48,15 @@ return [
             'general'   => 'General',
             'system'    => 'System',
         ],
+
+        'products' => [
+            'all'             => 'All Products',
+            'create'          => 'Create Product',
+            'deleted'         => 'Deleted Products',
+            'edit'            => 'Edit Product',
+            'main'            => 'Products',
+            'view'            => 'View Product',
+        ],
     ],
 
     'language-picker' => [

@@ -1,6 +1,6 @@
 @extends ('backend.layouts.app')
 
-@section ('title', trans('labels.backend.access.users.management'))
+@section ('title', trans('labels.backend.products.management'))
 
 @section('after-styles')
     {{ Html::style("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.css") }}
@@ -8,33 +8,30 @@
 
 @section('page-header')
     <h1>
-        {{ trans('labels.backend.access.users.management') }}
-        <small>{{ trans('labels.backend.access.users.active') }}</small>
+        {{ trans('labels.backend.products.management') }}
     </h1>
 @endsection
 
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">{{ trans('labels.backend.access.users.active') }}</h3>
+            <h3 class="box-title">{{ trans('labels.backend.products.management') }}</h3>
 
             <div class="box-tools pull-right">
-                @include('backend.access.includes.partials.user-header-buttons')
+                @include('backend.product.includes.partials.product-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
 
         <div class="box-body">
             <div class="table-responsive">
-                <table id="users-table" class="table table-condensed table-hover">
+                <table id="products-table" class="table table-condensed table-hover">
                     <thead>
                     <tr>
-                        <th>{{ trans('labels.backend.access.users.table.id') }}</th>
-                        <th>{{ trans('labels.backend.access.users.table.name') }}</th>
-                        <th>{{ trans('labels.backend.access.users.table.email') }}</th>
-                        <th>{{ trans('labels.backend.access.users.table.confirmed') }}</th>
-                        <th>{{ trans('labels.backend.access.users.table.roles') }}</th>
-                        <th>{{ trans('labels.backend.access.users.table.created') }}</th>
-                        <th>{{ trans('labels.backend.access.users.table.last_updated') }}</th>
+                        <th>{{ trans('labels.backend.products.table.id') }}</th>
+                        <th>{{ trans('labels.backend.products.table.name') }}</th>
+                        <th>{{ trans('labels.backend.products.table.description') }}</th>
+                        <th>{{ trans('labels.backend.products.table.created') }}</th>
+                        <th>{{ trans('labels.backend.products.table.last_updated') }}</th>
                         <th>{{ trans('labels.general.actions') }}</th>
                     </tr>
                     </thead>
@@ -61,22 +58,20 @@
 
     <script>
         $(function () {
-            $('#users-table').DataTable({
+            $('#products-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route("admin.access.user.get") }}',
+                    url: '{{ route("admin.product.get") }}',
                     type: 'post',
                     data: {status: 1, trashed: false}
                 },
                 columns: [
-                    {data: 'id', name: '.id'},
-                    {data: 'name', name: '{{config('access.users_table')}}.name'},
-                    {data: 'email', name: '{{config('access.users_table')}}.email'},
-                    {data: 'confirmed', name: '{{config('access.users_table')}}.confirmed'},
-                    {data: 'roles', name: '{{config('access.roles_table')}}.name', sortable: false},
-                    {data: 'created_at', name: '{{config('access.users_table')}}.created_at'},
-                    {data: 'updated_at', name: '{{config('access.users_table')}}.updated_at'},
+                    {data: 'id', name: '{{config('product.products_table')}}.id'},
+                    {data: 'name', name: '{{config('product.products_table')}}.name'},
+                    {data: 'description', name: '{{config('product.products_table')}}.description'},
+                    {data: 'created_at', name: '{{config('product.products_table')}}.created_at'},
+                    {data: 'updated_at', name: '{{config('product.products_table')}}.updated_at'},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false}
                 ],
                 order: [[0, "asc"]],
