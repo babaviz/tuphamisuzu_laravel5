@@ -46,6 +46,7 @@ return [
         'sidebar' => [
             'dashboard' => 'Dashboard',
             'general'   => 'General',
+            'main'      => 'Main',
             'system'    => 'System',
         ],
 
@@ -56,6 +57,7 @@ return [
             'edit'            => 'Edit Product',
             'main'            => 'Products',
             'view'            => 'View Product',
+            'category'        => 'Category',
         ],
     ],
 

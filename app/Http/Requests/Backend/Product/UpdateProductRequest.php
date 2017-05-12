@@ -27,7 +27,7 @@ class UpdateProductRequest extends Request
     public function rules()
     {
         return [
-            'email' => 'required|email|max:191',
+            'description' => 'required',
             'name'  => 'required|max:191',
         ];
     }

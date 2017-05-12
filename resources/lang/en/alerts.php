@@ -30,5 +30,12 @@ return [
             'updated'             => 'The user was successfully updated.',
             'updated_password'    => "The user's password was successfully updated.",
         ],
+        'products' => [
+            'created'             => 'The product was successfully created.',
+            'deleted'             => 'The product was successfully deleted.',
+            'deleted_permanently' => 'The product was deleted permanently.',
+            'restored'            => 'The product was successfully restored.',
+            'updated'             => 'The product was successfully updated.',
+        ],
     ],
 ];

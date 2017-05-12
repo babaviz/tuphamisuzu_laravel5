@@ -151,6 +151,18 @@ return [
                     'send_confirmation_email' => 'Send Confirmation E-mail',
                 ],
             ],
+            'products' => [
+                'active'                  => 'Active',
+                'associated_roles'        => 'Associated Roles',
+                'confirmed'               => 'Confirmed',
+                'email'                   => 'E-mail Address',
+                'description'             => 'Product Description',
+                'name'                    => 'Name',
+                'other_permissions'       => 'Other Permissions',
+                'password'                => 'Password',
+                'password_confirmation'   => 'Password Confirmation',
+                'send_confirmation_email' => 'Send Confirmation E-mail',
+            ],
         ],
 
         'frontend' => [

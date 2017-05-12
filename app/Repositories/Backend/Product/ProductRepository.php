@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Backend\Product;
 
+use App\Events\Backend\Product\ProductCreated;
+use App\Events\Backend\Product\ProductUpdated;
 use App\Models\Product\Product;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
@@ -62,31 +64,18 @@ class ProductRepository extends BaseRepository
     public function create($input)
     {
         $data = $input['data'];
-        $roles = $input['roles'];
 
-        $user = $this->createProductStub($data);
+        $product = $this->createProductStub($data);
 
-        DB::transaction(function () use ($user, $data, $roles) {
-            if ($user->save()) {
-                //User Created, Validate Roles
-                if (! count($roles['assignees_roles'])) {
-                    throw new GeneralException(trans('exceptions.backend.access.users.role_needed_create'));
-                }
+        DB::transaction(function () use ($product, $data) {
+            if ($product->save()) {
 
-                //Attach new roles
-                $user->attachRoles($roles['assignees_roles']);
-
-                //Send confirmation email if requested
-                if (isset($data['confirmation_email']) && $user->confirmed == 0) {
-                    $user->notify(new UserNeedsConfirmation($user->confirmation_code));
-                }
-
-                event(new UserCreated($user));
+                event(new ProductCreated($product));
 
                 return true;
             }
 
-            throw new GeneralException(trans('exceptions.backend.access.users.create_error'));
+            throw new GeneralException(trans('exceptions.backend.products.create_error'));
         });
     }
 
@@ -97,24 +86,16 @@ class ProductRepository extends BaseRepository
      * @return bool
      * @throws GeneralException
      */
-    public function update(Model $user, array $input)
+    public function update(Model $product, array $input)
     {
         $data = $input['data'];
-        $roles = $input['roles'];
 
-        $this->checkUserByEmail($data, $user);
+        $product->name = $data['name'];
+        $product->description = $data['description'];
 
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->status = isset($data['status']) ? 1 : 0;
-        $user->confirmed = isset($data['confirmed']) ? 1 : 0;
-
-        DB::transaction(function () use ($user, $data, $roles) {
-            if ($user->save()) {
-                $this->checkUserRolesCount($roles);
-                $this->flushRoles($roles, $user);
-
-                event(new UserUpdated($user));
+        DB::transaction(function () use ($product, $data) {
+            if ($product->save()) {
+                event(new ProductUpdated($product));
 
                 return true;
             }

@@ -37,6 +37,30 @@
                 </a>
             </li>
 
+            <li class="header">{{ trans('menus.backend.sidebar.main') }}</li>
+            <li class="{{ active_class(Active::checkUriPattern('admin/product*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span>{{ trans('menus.backend.products.main') }}</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/product*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/product')) }}">
+                        <a href="{{ route('admin.product.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('menus.backend.products.main') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
+                        <a href="{{ route('log-viewer::logs.list') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('menus.backend.products.category') }} (Not working)</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
 
             @role(1)

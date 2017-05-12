@@ -33,5 +33,13 @@ return [
             'reactivated'         => 'reactivated user',
             'restored'            => 'restored user',
         ],
+
+        'products' => [
+            'created'             => 'created product',
+            'deleted'             => 'deleted product',
+            'permanently_deleted' => 'permanently deleted product',
+            'updated'             => 'updated product',
+            'restored'            => 'restored product',
+        ],
     ],
 ];

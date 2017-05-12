@@ -45,6 +45,14 @@ return [
                 'update_error'          => 'There was a problem updating this user. Please try again.',
                 'update_password_error' => 'There was a problem changing this users password. Please try again.',
             ],
+            'products' => [
+                'create_error'          => 'There was a problem creating this product. Please try again.',
+                'delete_error'          => 'There was a problem deleting this product. Please try again.',
+                'delete_first'          => 'This product must be deleted first before it can be destroyed permanently.',
+                'not_found'             => 'That product does not exist.',
+                'restore_error'         => 'There was a problem restoring this product. Please try again.',
+                'update_error'          => 'There was a problem updating this product. Please try again.',
+            ],
         ],
     ],
 

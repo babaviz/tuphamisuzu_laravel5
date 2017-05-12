@@ -3,10 +3,28 @@
 namespace App\Http\Controllers\Backend\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Product\ManageProductRequest;
+use App\Http\Requests\Backend\Product\StoreProductRequest;
+use App\Http\Requests\Backend\Product\UpdateProductRequest;
+use App\Models\Product\Product;
+use App\Repositories\Backend\Product\ProductRepository;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    /**
+     * @var ProductRepository
+     */
+    protected $products;
+
+
+    /**
+     * @param ProductRepository $products
+     */
+    public function __construct(ProductRepository $products)
+    {
+        $this->products = $products;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +45,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        return view('backend.product.create');
     }
 
     /**
@@ -35,9 +54,15 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         //
+//        var_dump($request);
+        $this->products->create([
+            'data' => $request->only('name', 'description'),
+        ]);
+
+        return redirect()->route('admin.product.index')->withFlashSuccess(trans('alerts.backend.product.created'));
     }
 
     /**
@@ -54,25 +79,36 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Product $product
+     * @param  ManageProductRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product, ManageProductRequest $request)
     {
         //
+        return view('backend.product.edit')
+            ->withProduct($product);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Product $product
+     * @param  UpdateProductRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Product $product, UpdateProductRequest $request)
     {
+//        var_dump($product); die();
         //
+        $this->products->update($product, [
+            'data' => $request->only('name', 'description'),
+        ]);
+
+        return redirect()->route('admin.product.index')->withFlashSuccess(trans('alerts.backend.products.updated'));
     }
+
 
     /**
      * Remove the specified resource from storage.
