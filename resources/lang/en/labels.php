@@ -101,6 +101,7 @@ return [
         'products' => [
             'create'     => 'Create Product',
             'edit'       => 'Edit Product',
+            'view'       => 'View Product',
             'management' => 'Product Management',
 
             'table' => [
